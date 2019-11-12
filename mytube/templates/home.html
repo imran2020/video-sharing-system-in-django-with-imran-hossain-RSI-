@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    MyTube
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+         body{
+            background:  white   ;
+         }
+        #img{
+            height:130px;
+            width:220px;
+        }
+
+        .tube{
+            width:220px;
+            height:250px;
+            float:left;
+            margin-top:35px;
+            margin-left:20px;
+
+        }
+        .home{
+            margin-left:20px;
+        }
+        .tube a {
+
+            color: black;
+            text-decoration: none;
+            font-size:19px;
+
+        }
+        #channel{
+
+            font-size:16px;
+            font-weight:bold;
+            color:gray;
+        }
+        #date{
+            color:gray;
+        }
+
+    </style>
+{% endblock %}
+
+{% block container %}
+
+    <div class="home">
+        {% for v in video %}
+
+            <div class="tube">
+                <a href="{% url 'show' id=v.id %}">
+                    <img id="img" src="{{v.video_cover_page.url}}" alt="RSI" >
+                </a>
+
+                 <a href="{% url 'show' id=v.id %}">
+                    <p id="title">{{v.video_title|truncatewords:7}}</p>
+                 </a>
+                <a href="{% url 'channel' id=v.id %}">
+                    <p id="channel" >{{v.uploader_name.channel_name|truncatewords:3}}</p>
+                 </a>
+                <p id="date" >{{v.published_day|timesince}} ago</p>
+
+
+            </div>
+
+        {% endfor %}
+        
+
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
